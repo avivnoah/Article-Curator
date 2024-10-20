@@ -14,7 +14,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/like", "/dislike"))  // Disable CSRF for specific endpoints
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/", "/manual_label", "/like", "/dislike").permitAll()  // Allow access to these URLs
+                        .requestMatchers("/", "/manual_label", "/like", "/dislike", "/styles.css").permitAll()  // Allow access to these URLs
                         .anyRequest().authenticated());  // Require authentication for all other requests
 
         return http.build();  // Build and return the security filter chain
