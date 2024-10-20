@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Label Article</title>
+</head>
+<body>
+<h1>Label Article</h1>
+<div id="article">
+  <h2 th:text="${article.url}"></h2> <!-- Correctly display the article URL -->
+  <p th:text="${article.data}"></p> <!-- Correctly display the article data -->
+</div>
+<form action="/like" method="post">
+  <input type="hidden" name="articleId" th:value="${article.id}"> <!-- Pass article ID -->
+  <button type="submit">Like</button>
+</form>
+<form action="/dislike" method="post">
+  <input type="hidden" name="articleId" th:value="${article.id}"> <!-- Pass article ID -->
+  <button type="submit">Dislike</button>
+</form>
+<br>
+<a href="/">Home</a>
+</body>
+</html>
