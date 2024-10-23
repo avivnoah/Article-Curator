@@ -10,6 +10,23 @@ public class Article {
     private String url;
     private String data;
 
+    private int preference;
+
+    public Article(){
+
+    }
+    public Article(String id, String url, String data){
+        this.id = id;
+        this.url = url;
+        this.data = data;
+        this.preference = 0;
+    }
+    public Article(String id, String url, String data, int preference){
+        this.id = id;
+        this.url = url;
+        this.data = data;
+        this.preference = preference;
+    }
     // Getters and Setters
     public String getId() {
         return id;
@@ -34,4 +51,5 @@ public class Article {
     public void setData(String data) {
         this.data = data;
     }
+
 }

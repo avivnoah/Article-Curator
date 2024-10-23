@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ArticleLabelingApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ArticleLabelingApplication.class, args);
-    }
+        public static void main(String[] args) {
+                SpringApplication.run(ArticleLabelingApplication.class, args);
+        }
 
 }

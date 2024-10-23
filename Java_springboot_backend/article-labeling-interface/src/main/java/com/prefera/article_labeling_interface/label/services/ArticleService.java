@@ -6,7 +6,10 @@ import com.prefera.article_labeling_interface.label.repositories.ArticleReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
 @Service
 public class ArticleService {
 
@@ -21,13 +24,16 @@ public class ArticleService {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
 
-        if(liked){
-            mongoTemplate.save(article, "liked_articles");
-        }
-        else{
-            mongoTemplate.save(article, "disliked_articles");
-        }
-        mongoTemplate.save(article, "labeled_articles");
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(article.getId()));
+        //Update update = new Update();
+        Article articleCopy = new Article(article.getId(), article.getUrl(), article.getData(), liked ? 1 : -1);
+
+        mongoTemplate.save(articleCopy, "labeled_articles");
+        //mongoTemplate.save(article, "labeled_articles");
+        // Update the document
+        //mongoTemplate.updateFirst(query, update, Article.class);
 
         // Save the article to the liked articles collection
         // Remove the article from the original database
