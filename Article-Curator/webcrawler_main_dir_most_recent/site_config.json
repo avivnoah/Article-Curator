@@ -1,0 +1,28 @@
+{
+    "morningbrew": {
+        "url": "https://www.morningbrew.com",
+        "article_link_pattern": "/search",
+        "link_selectors": ["a:has(article)"],
+        "article_selectors": [
+            "div.article-body-content p",
+            "article p",
+            "main p"
+        ],
+        "load_more_button": "button:has-text(\"Load More\")",
+        "headless": "True",
+        "scroll_down": "True"
+    },
+    "emergingtechbrew": {
+        "url": "https://www.emergingtechbrew.com",
+        "article_link_pattern": "/search",
+        "link_selectors": ["a:has(article)"],
+        "article_selectors": [
+            "div.article-body-content p",
+            "article p",
+            "main p"
+        ],
+        "load_more_button": "button:has-text(\"Load More\")",
+        "headless": "True",
+        "scroll_down": "True"
+    }
+}

@@ -1,0 +1,23 @@
+Article Curator
+
+I want:
+inputs:
+1. url list
+
+To dos:
+1. Scrapes articles
+2. lets you like / dislike current article to study you
+3. saves your preferences(per user)
+4. filter articles - ML algo - which one?(netflix? item based? ...)
+5. nice interface design
+6. filter real, 'fake'=faulty articles
+
+Collect database for all articles
+For each user, preferences, articles visited list,
+
+Stuff to use:
+*Expo?
+*NEXT.js
+*supabase / Firebase auth
+*vercel deployment
+*PostHog - user event tracker

@@ -1,0 +1,3 @@
+[submodule "webcrawler_morningbrew_article"]
+	path = webcrawler_morningbrew_article
+	url = git@github.com:avivnoah/webcrawler_morningbrew_article.git
