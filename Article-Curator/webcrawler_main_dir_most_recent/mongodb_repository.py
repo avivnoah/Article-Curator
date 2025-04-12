@@ -26,17 +26,17 @@ def start_mongodb():
         print("Failed to start MongoDB service.")
         print(e.stderr)
 
-def upload_articles_to_mongodb(url_data_map):
+def upload_articles_to_mongodb(url_data_map, collection_name="unlabeled_articles"):
     client = MongoClient("mongodb://localhost:27017/")  # Adjust as needed
     db = client[DATABASE_NAME]  # Name of your database
-    collection = db["articles"]  # Name of your collection
+    collection = db[collection_name]  # Name of your collection
 
     # Prepare documents for insertion
     documents = []
     for url, data in url_data_map.items():
         documents.append({
             "url": url,
-            "data": "\n".join(data),
+            "data": data if isinstance(data, str) else "\n".join(data),
             "user_id": 1,
             "preference": 0
         })
@@ -82,6 +82,66 @@ def add_collection_field(collection_name, field_name, value):
     result = collection.update_many({}, {'$set': {field_name: value}})
     print(f"Added field '{field_name}' with value '{value}' to {result.modified_count} documents in collection '{collection_name}'.")
 
+def load_collection(collection_name="labeled_articles"):
+    client = MongoClient("mongodb://localhost:27017/")  # Adjust as needed
+    db = client[DATABASE_NAME]  # Name of your database
+    collection = db[collection_name]  # Name of your collection
+    return collection
+
+def update_shared_field(field_name, new_value, collection_name="unlabeled_articles"):
+    client = MongoClient("mongodb://localhost:27017/")  # Adjust as needed
+    db = client[DATABASE_NAME]  # Name of your database
+    collection = db[collection_name]  # Name of your collection
+    for doc in collection.find({field_name: {"$exists": True}}):
+        old_label = doc[field_name]
+        if old_label == -1:
+            collection.update_one(
+                {"_id": doc["_id"]},
+                {"$set": {field_name: new_value}}
+            )
+
+def find_collections():
+    client = MongoClient("mongodb://localhost:27017/")  # Adjust as needed
+    db = client[DATABASE_NAME]  # Name of your database
+    print(db.list_collection_names())
+
+
+def extract_collection_difference(collection1="", collection2="", field_to_compare_by="url"):
+    client = MongoClient("mongodb://localhost:27017/")  # Adjust as needed
+    db = client[DATABASE_NAME]  # Name of your database
+    collection1 = db[collection1]  # Name of your collection
+    collection2 = db[collection2]  # Name of your collection
+    docs_to_remove = set()
+    for doc in collection1.find({}):
+        for doc_to_subtract in collection2.find({}):
+            print(doc["url"], doc_to_subtract[field_to_compare_by])
+            if doc_to_subtract[field_to_compare_by] == doc[field_to_compare_by]:
+                docs_to_remove.add(doc)
+    if docs_to_remove:
+        docs_to_remove.delete_many({"_id": {"$in": docs_to_remove}})
+        print(f"Removed {len(docs_to_remove)} duplicates.")
+
+def remove_duplicates(filter_by_field_name, collection_name="unlabeled_articles"):
+    client = MongoClient("mongodb://localhost:27017/")  # Adjust as needed
+    db = client[DATABASE_NAME]  # Name of your database
+    collection = db[collection_name]  # Name of your collection
+    # Step 1: Find duplicates by field, keeping only the first _id for each unique field value
+    seen = set()
+    duplicates = []
+
+    for doc in collection.find({}):
+        url = doc['url']
+        if url in seen:
+            duplicates.append(doc['_id'])
+        else:
+            seen.add(url)
+    if duplicates:
+        collection.delete_many({"_id": {"$in": duplicates}})
+        print(f"Removed {len(duplicates)} duplicates.")
+
+remove_duplicates("url")
+#extract_collection_difference("labeled_articles", "unlabeled_articles", "url")
+#update_shared_field("preference", None)
 #remove_collection_field("articles", "preference")
 
 

@@ -6,7 +6,7 @@ from playwright_stealth import stealth_sync
 import mongodb_repository
 from multiprocessing import cpu_count
 
-def gather_links_parallel(sites_to_crawl: set, scroll_range=10, total_links_target=60):
+def gather_links_parallel(sites_to_crawl: set, scroll_range=50, total_links_target=700):
     """
     This function handles link gathering in its totality
     :param sites_to_crawl: a set of sites to crawl
@@ -14,6 +14,7 @@ def gather_links_parallel(sites_to_crawl: set, scroll_range=10, total_links_targ
     :param total_links_target: amount of links total
     :return: a set of all the links extracted
     """
+    print(f"crawling for {total_links_target} links.")
     with open("site_config.json", "r") as config_file:
         site_configs = json.load(config_file)
 
@@ -23,6 +24,7 @@ def gather_links_parallel(sites_to_crawl: set, scroll_range=10, total_links_targ
     def crawl_single_site(site):
         config = site_configs[site]
         local_links = set()
+
         print(f"\n🚀 Crawling: {site}")
 
         with sync_playwright() as p:
@@ -113,10 +115,10 @@ def extract_article_data_wrapper(args):
             page.goto(config["url"] + url)
             data = get_article_paragraphs(page, selectors)
             browser.close()
-            return (url, data)
+            return (config["url"] + url, data)
         except Exception as e:
             print(f"❌ Failed to extract {url}: {e}")
-            return (url, [])
+            return (config["url"] + url, [])
 
 # --------- MAIN ---------
 
@@ -148,6 +150,6 @@ def web_crawling_main_method():
     print(f"\n✅ Extracted {len(article_map)} articles.")
 
     print("\n📥 Inserting into MongoDB...")
-    # mongodb_repository.start_mongodb()
-    # mongodb_repository.upload_articles_to_mongodb(article_map)
+    mongodb_repository.start_mongodb()
+    mongodb_repository.upload_articles_to_mongodb(article_map)
     print("✅ All done.")

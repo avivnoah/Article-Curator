@@ -86,5 +86,3 @@ def add_collection_field(collection_name, field_name, value):
     print(f"Added field '{field_name}' with value '{value}' to {result.modified_count} documents in collection '{collection_name}'.")
 
 remove_collection_field("articles", "preference")
-
-
