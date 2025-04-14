@@ -139,6 +139,18 @@ def remove_duplicates(filter_by_field_name, collection_name="unlabeled_articles"
         collection.delete_many({"_id": {"$in": duplicates}})
         print(f"Removed {len(duplicates)} duplicates.")
 
+def update_scores_to_articles(articles):
+    client = MongoClient("mongodb://localhost:27017/")
+    db = client[DATABASE_NAME]
+    collection = db["unlabeled_articles"]
+
+    # `ranked` is: [(url1, score1), (url2, score2), ...]
+    for url, score in articles:
+        collection.update_one(
+            {"url": url},  # Match by URL
+            {"$set": {"score": float(score)}}
+        )
+
 remove_duplicates("url")
 #extract_collection_difference("labeled_articles", "unlabeled_articles", "url")
 #update_shared_field("preference", None)

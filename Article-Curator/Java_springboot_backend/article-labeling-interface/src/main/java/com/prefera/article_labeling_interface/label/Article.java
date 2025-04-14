@@ -1,5 +1,4 @@
 package com.prefera.article_labeling_interface.label;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,8 +8,8 @@ public class Article {
     private String id;
     private String url;
     private String data;
-
-    private int preference;
+    private float score;
+    private Integer preference;
 
     public Article(){
 
@@ -51,5 +50,8 @@ public class Article {
     public void setData(String data) {
         this.data = data;
     }
+
+    public Integer getPreference() { return preference; }
+    public void setPreference(Integer preference) { this.preference = preference; }
 
 }

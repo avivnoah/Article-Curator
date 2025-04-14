@@ -6,6 +6,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+
 def build_model(data_dim):
     model = tf.keras.models.Sequential([
         # Add an input layer
@@ -89,11 +90,13 @@ def score_model(model):
     unlabeled_urls = unlabeled_collection_df["url"].values  # (n_samples,)
     scores = model.predict(unlabeled_data).flatten()
     ranked = list(zip(unlabeled_urls, scores))
+    recommender_repository.score_articles_in_mongo(ranked)
     ranked.sort(key=lambda x: x[1], reverse=True)
     top_k = 5
     print("📰 Top recommended articles:")
     for i, (url, score) in enumerate(ranked[:top_k], 1):
         print(f"{i}. ({score:.3f}) {url}")
+
 
 
 

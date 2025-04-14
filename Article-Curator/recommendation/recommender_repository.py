@@ -83,3 +83,7 @@ def load_collection(collection_name="labeled_articles", labeled=False):
     if labeled:
         return preprocess_mongodb_collection(mongodb_repository.load_collection(collection_name))
     return preprocess_mongodb_unlabeled_collection(mongodb_repository.load_collection(collection_name))
+
+def score_articles_in_mongo(articles):
+    # `ranked` is: [(url1, score1), (url2, score2), ...]
+    mongodb_repository.update_scores_to_articles(articles)

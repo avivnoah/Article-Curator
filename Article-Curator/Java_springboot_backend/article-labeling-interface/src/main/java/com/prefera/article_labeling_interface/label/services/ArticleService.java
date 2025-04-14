@@ -28,7 +28,7 @@ public class ArticleService {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(article.getId()));
         //Update update = new Update();
-        Article articleCopy = new Article(article.getId(), article.getUrl(), article.getData(), liked ? 1 : -1);
+        Article articleCopy = new Article(article.getId(), article.getUrl(), article.getData(), liked ? 1 : 0);
 
         mongoTemplate.save(articleCopy, "labeled_articles");
         //mongoTemplate.save(article, "labeled_articles");
