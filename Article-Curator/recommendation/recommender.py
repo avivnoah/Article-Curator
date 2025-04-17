@@ -91,6 +91,9 @@ def score_model(model):
     scores = model.predict(unlabeled_data).flatten()
     ranked = list(zip(unlabeled_urls, scores))
     recommender_repository.score_articles_in_mongo(ranked)
+
+    # This lower segment is unnecessary!
+    # If i want to print here:
     ranked.sort(key=lambda x: x[1], reverse=True)
     top_k = 5
     print("📰 Top recommended articles:")
