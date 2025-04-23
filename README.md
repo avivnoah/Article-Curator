@@ -7,12 +7,11 @@ Implemented a a full-stack machine-learning-powered system that recommends artic
 ## Demo
 
 Behind the  scenes...🤔
-![Demo](demo.gif)
 
 
 https://github.com/user-attachments/assets/b29bb709-f63a-49b7-95f8-6a9d2553320e
 
-#https://github.com/user-attachments/assets/e76e805e-3f12-44fc-8bd5-1f7b21a02fae
+https://github.com/user-attachments/assets/e76e805e-3f12-44fc-8bd5-1f7b21a02fae
 
 
 ## Installation
