@@ -7,6 +7,10 @@ Implemented a a full-stack machine-learning-powered system that recommends artic
 ## Demo
 
 Behind the  scenes...🤔
+<video width="800" controls>
+  <source src="https://github.com/avivnoah/Article-Curator/raw/8344b8504047d7c80c3830b8b3d4b35501a7befc/2025-04-17%2020-19-33.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
 https://github.com/avivnoah/Article-Curator/blob/8344b8504047d7c80c3830b8b3d4b35501a7befc/2025-04-17%2020-19-33.webm
 
 https://github.com/user-attachments/assets/e76e805e-3f12-44fc-8bd5-1f7b21a02fae
