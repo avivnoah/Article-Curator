@@ -12,7 +12,7 @@ Behind the  scenes...🤔
   <source src="https://github.com/avivnoah/Article-Curator/blob/8344b8504047d7c80c3830b8b3d4b35501a7befc/2025-04-17%2020-19-33.webm" type="video/webm">
   Your browser does not support the video tag.
 </video>
-
+https://github.com/user-attachments/assets/b29bb709-f63a-49b7-95f8-6a9d2553320e
 
 https://github.com/user-attachments/assets/e76e805e-3f12-44fc-8bd5-1f7b21a02fae
 
