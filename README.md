@@ -9,7 +9,7 @@ Implemented a a full-stack machine-learning-powered system that recommends artic
 Behind the  scenes...🤔
 ![Demo](demo.gif)
 <video width="800" controls>
-  <source src="output.mp4" type="video/mp4">
+  <source src="https://github.com/avivnoah/Article-Curator/raw/8344b8504047d7c80c3830b8b3d4b35501a7befc/output.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
