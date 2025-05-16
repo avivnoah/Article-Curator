@@ -1,0 +1,4 @@
+1. support creating users
+2. Allow scaleup/down using aws
+3. Change the recommendation system to user-based (transformer)
+4. Scalable Crawling System
